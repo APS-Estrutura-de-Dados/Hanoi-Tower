@@ -5,11 +5,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -18,6 +15,8 @@ public class TesteHanoiTower {
 	// Para armazenar a resolucao da maquina
 	public static Toolkit toolkit = Toolkit.getDefaultToolkit();
 	public static Dimension dimension = toolkit.getScreenSize();
+	public static int x;
+	public static int y;
 
 	// Para mostrar o cursor do mouse diferente para clicar nas coisas
 	static Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
@@ -40,8 +39,8 @@ public class TesteHanoiTower {
 	public static void main(String[] args) {
 
 		// Para armazenar a resolucao da maquina
-		int x = dimension.width;
-		int y = dimension.height;
+		x = dimension.width;
+		y = dimension.height;
 
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Mostrar Botão de Fechar do Sistema
@@ -50,7 +49,7 @@ public class TesteHanoiTower {
 		frame.setLayout(null);
 
 		// TOWERS -----------------
-		
+
 		t1 = new JPanel();
 		t1.setBorder(line1);
 		t1.setOpaque(false);
@@ -130,13 +129,13 @@ public class TesteHanoiTower {
 				if (!clickA) {
 					btnA.setText("Cancelar");
 					clickA = true;
-					
-					if(clickB) {
-						Move("B","A");
-					}else if(clickC) {
-						Move("C","A");
+
+					if (clickB) {
+						// Move("B", "A");
+					} else if (clickC) {
+						// Move("C", "A");
 					}
-					
+
 				} else {
 					btnA.setText("Move A");
 					clickA = false;
@@ -149,13 +148,13 @@ public class TesteHanoiTower {
 				if (!clickB) {
 					btnB.setText("Cancelar");
 					clickB = true;
-					
-					if(clickA) {
-						Move("A","B");
-					}else if (clickC) {
-						Move("C","B");
+
+					if (clickA) {
+						// Move("A", "B");
+					} else if (clickC) {
+						// Move("C", "B");
 					}
-					
+
 				} else {
 					btnB.setText("Move B");
 					clickB = false;
@@ -168,13 +167,13 @@ public class TesteHanoiTower {
 				if (!clickC) {
 					btnC.setText("Cancelar");
 					clickC = true;
-					
-					if(clickA) {
-						Move("A","C");
-					}else if(clickB) {
-						Move("B","C");
+
+					if (clickA) {
+						// Move("A", "C");
+					} else if (clickB) {
+						// Move("B", "C");
 					}
-					
+
 				} else {
 					btnC.setText("Move C");
 					clickC = false;
@@ -182,42 +181,12 @@ public class TesteHanoiTower {
 			}
 		});
 
-		
+		Atualizar();
 
 		frame.setVisible(true); // Tornar Painel visível
 	}
 
-	private static void MoveToA() {
-
-		// Level 3 - t1.setBounds(x / 2 - (250 + 55), y - (450 - 20), 110, 60);
-		// Level 2 - t2.setBounds(x / 2 - (250 + 65), y - (450 - 80), 130, 60);
-		// Level 1 - t3.setBounds(x / 2 - (250 + 75), y - (450 - 140), 150, 60);
-
-	}
-
-	private static void MoveToB() {
-
-		// Level 3 - t1.setBounds(x / 2 - (0 + 55), y - (450 - 20), 110, 60);
-		// Level 2 - t2.setBounds(x / 2 - (0 + 65), y - (450 - 80), 130, 60);
-		// Level 1 - t3.setBounds(x / 2 - (0 + 75), y - (450 - 140), 150, 60);
-
-	}
-
-	private static void MoveToC() {
-
-		// Level 3 - t1.setBounds(x / 2 + (260 - 55), y - (450 - 20), 110, 60);
-		// Level 2 - t2.setBounds(x / 2 + (260 - 65), y - (450 - 80), 130, 60);
-		// Level 1 - t3.setBounds(x / 2 + (260 - 75), y - (450 - 140), 150, 60);
-
-	}
-	
-	private static void Move(String from, String to) {
-
-		JOptionPane.showMessageDialog(null, "Move From \"" + from + "\" To \"" + to + "\"");
-		ZerarBotoes();
-
-	}
-	
+	// Reseta o conteúdo dos botões após mover um Disco
 	private static void ZerarBotoes() {
 
 		btnA.setText("Move A");
@@ -227,6 +196,129 @@ public class TesteHanoiTower {
 		btnC.setText("Move C");
 		clickC = false;
 
-	}	
+	}
+
+	// Identifica quais Discos devem aparecer no Pino A
+	private static void FillPinA() {
+
+		HanoiTower hanoiTower = new HanoiTower();
+		String pin = hanoiTower.printPinA();
+
+		// Identificando o Disco 1 (que ficará em baixo) ---
+
+		if (pin.charAt(0) == '1') {
+			t1.setBounds(x / 2 - (250 + 55), y - (450 - 20), 110, 60);
+		} else if (pin.charAt(0) == '2') {
+			t2.setBounds(x / 2 - (250 + 65), y - (450 - 20), 130, 60);
+		} else if (pin.charAt(0) == '3') {
+			t3.setBounds(x / 2 - (250 + 75), y - (450 - 20), 150, 60);
+		}
+
+		// Identificando o Disco 2 (que ficará no meio) ---
+
+		if (pin.charAt(1) == '1') {
+			t1.setBounds(x / 2 - (250 + 55), y - (450 - 80), 110, 60);
+		} else if (pin.charAt(1) == '2') {
+			t2.setBounds(x / 2 - (250 + 65), y - (450 - 80), 130, 60);
+		} else if (pin.charAt(1) == '3') {
+			t3.setBounds(x / 2 - (250 + 75), y - (450 - 80), 150, 60);
+		}
+
+		// Identificando o Disco 3 (que ficará no topo) ---
+		if (pin.charAt(2) == '1') {
+			t1.setBounds(x / 2 - (250 + 55), y - (450 - 140), 110, 60);
+		} else if (pin.charAt(2) == '2') {
+			t2.setBounds(x / 2 - (250 + 65), y - (450 - 140), 130, 60);
+		} else if (pin.charAt(2) == '3') {
+			t3.setBounds(x / 2 - (250 + 75), y - (450 - 140), 150, 60);
+		}
+
+	}
+
+	// Identifica quais Discos devem aparecer no Pino B
+	private static void FillPinB() {
+
+		HanoiTower hanoiTower = new HanoiTower();
+		String pin = hanoiTower.printPinB();
+
+		// Identificando o Disco 1 (que ficará em baixo) ---
+
+		if (pin.charAt(0) == '1') {
+			t1.setBounds(x / 2 - (0 + 55), y - (450 - 20), 110, 60);
+		} else if (pin.charAt(0) == '2') {
+			t2.setBounds(x / 2 - (0 + 65), y - (450 - 20), 130, 60);
+		} else if (pin.charAt(0) == '3') {
+			t3.setBounds(x / 2 - (0 + 75), y - (450 - 20), 150, 60);
+		}
+
+		// Identificando o Disco 2 (que ficará no meio) ---
+
+		if (pin.charAt(1) == '1') {
+			t1.setBounds(x / 2 - (0 + 55), y - (450 - 80), 110, 60);
+		} else if (pin.charAt(1) == '2') {
+			t2.setBounds(x / 2 - (0 + 65), y - (450 - 80), 130, 60);
+		} else if (pin.charAt(1) == '3') {
+			t3.setBounds(x / 2 - (0 + 75), y - (450 - 80), 150, 60);
+		}
+
+		// Identificando o Disco 3 (que ficará no topo) ---
+
+		if (pin.charAt(2) == '1') {
+			t1.setBounds(x / 2 - (0 + 55), y - (450 - 140), 110, 60);
+		} else if (pin.charAt(2) == '2') {
+			t2.setBounds(x / 2 - (0 + 65), y - (450 - 140), 130, 60);
+		} else if (pin.charAt(2) == '3') {
+			t3.setBounds(x / 2 - (0 + 75), y - (450 - 140), 150, 60);
+		}
+
+	}
+
+	// Identifica quais Discos devem aparecer no Pino C
+	private static void FillPinC() {
+
+		HanoiTower hanoiTower = new HanoiTower();
+		String pin = hanoiTower.printPinC();
+
+		// Identificando o Disco 1 (que ficará em baixo) ---
+
+		if (pin.charAt(0) == '1') {
+			t1.setBounds(x / 2 + (260 - 55), y - (450 - 20), 110, 60);
+		} else if (pin.charAt(0) == '2') {
+			t2.setBounds(x / 2 + (260 - 65), y - (450 - 20), 130, 60);
+		} else if (pin.charAt(0) == '3') {
+			t3.setBounds(x / 2 + (260 - 75), y - (450 - 20), 150, 60);
+		}
+
+		// Identificando o Disco 2 (que ficará no meio) ---
+
+		if (pin.charAt(1) == '1') {
+			t1.setBounds(x / 2 + (260 - 55), y - (450 - 80), 110, 60);
+		} else if (pin.charAt(1) == '2') {
+			t2.setBounds(x / 2 + (260 - 65), y - (450 - 80), 130, 60);
+		} else if (pin.charAt(1) == '3') {
+			t3.setBounds(x / 2 + (260 - 75), y - (450 - 80), 150, 60);
+		}
+
+		// Identificando o Disco 3 (que ficará no topo) ---
+
+		if (pin.charAt(2) == '1') {
+			t1.setBounds(x / 2 + (260 - 55), y - (450 - 140), 110, 60);
+		} else if (pin.charAt(2) == '2') {
+			t2.setBounds(x / 2 + (260 - 65), y - (450 - 140), 130, 60);
+		} else if (pin.charAt(2) == '3') {
+			t3.setBounds(x / 2 + (260 - 75), y - (450 - 140), 150, 60);
+		}
+
+	}
+
+	// Atualiza a posição dos Discos em cada Pino, de acordo com a Pilha
+	public static void Atualizar() {
+
+		FillPinA();
+		FillPinB();
+		FillPinC();
+		ZerarBotoes();
+
+	}
 
 }

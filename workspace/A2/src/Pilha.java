@@ -63,14 +63,16 @@ public class Pilha {
 	}
 
 	// imprime os elementos do topo ate o inicio
-	public void print() {
+	public String print() {
+		String elementos = "";
 		if (isEmpty()) {
-			System.out.println(" Pilha vazia ");
+			elementos = null;
 		} else {
 			for (int i = topo; i >= 0; i--) {
-				System.out.println(vetor[i]);
+				elementos+=vetor[i];
 			}
 		}
+		return elementos;
 	}
 
 }
