@@ -10,9 +10,9 @@ public class HanoiTower {
 
 		// Inicializando todas os Pinos
 		pinoA = new Pilha(3); // declara uma pilha com tamanho 3
-		pinoA.push(3); // insere disco de tamanho 0
-		pinoA.push(2); // insere disco de tamanho 0
-		pinoA.push(1); // insere disco de tamanho 0
+		pinoA.push(3); // insere disco de tamanho 3
+		pinoA.push(2); // insere disco de tamanho 2
+		pinoA.push(1); // insere disco de tamanho 1
 
 		pinoB = new Pilha(3); // declara uma pilha com tamanho 3
 		pinoB.push(0); // insere disco de tamanho 0
@@ -86,13 +86,15 @@ public class HanoiTower {
 				// Pega o valor do Disco que será movido
 				DiscoMovido = pinoOrigem.peekPosition(i);
 
-				// Verifica o tamanho do disco que estiver no topos
+				// Verifica o tamanho do disco que estiver no topo
 				for (int k = 2; k >= 0; k--) {
 					
 					if (pinoDestino.peekPosition(k) > 0) {
 						
 						if (DiscoMovido > pinoDestino.peekPosition(k)) {
 							stop = true;
+							pinoOrigem.pop();
+							posicoesExcluidas++;
 							i = -1;
 						}
 						
@@ -118,7 +120,7 @@ public class HanoiTower {
 			pinoOrigem.push(0);
 		}
 
-		if (!stop) {
+		
 
 			// Registra quantas posicoes iguais a zero foram excluidas, para reposição
 			posicoesExcluidas = 0;
@@ -157,7 +159,7 @@ public class HanoiTower {
 				// Repõe as posições vazias que foram excluidas
 				pinoDestino.push(0);
 			}
-		}
+		
 		return stop;
 	}
 

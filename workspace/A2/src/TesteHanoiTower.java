@@ -14,7 +14,7 @@ import javax.swing.border.LineBorder;
 public class TesteHanoiTower {
 
 	private static HanoiTower hanoiTower = new HanoiTower();
-	
+
 	// Para armazenar a resolucao da maquina
 	public static Toolkit toolkit = Toolkit.getDefaultToolkit();
 	public static Dimension dimension = toolkit.getScreenSize();
@@ -205,7 +205,7 @@ public class TesteHanoiTower {
 	private static void FillPinA() {
 
 		String pin = hanoiTower.printPinA();
-		//System.out.println(pin);
+		// System.out.println(pin);
 
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
@@ -242,8 +242,8 @@ public class TesteHanoiTower {
 	private static void FillPinB() {
 
 		String pin = hanoiTower.printPinB();
-		//System.out.println(pin);
-		
+		// System.out.println(pin);
+
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
 		if (pin.charAt(0) == '1') {
@@ -280,7 +280,7 @@ public class TesteHanoiTower {
 	private static void FillPinC() {
 
 		String pin = hanoiTower.printPinC();
-		//System.out.println(pin);
+		// System.out.println(pin);
 
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
@@ -315,18 +315,17 @@ public class TesteHanoiTower {
 	}
 
 	// Solicita a movimentação do Disco
-	public static void  Mover(char origem, char destino){
+	public static void Mover(char origem, char destino) {
 		boolean sucesso = hanoiTower.Move(origem, destino);
-		
-		if(sucesso) {
+
+		if (sucesso) {
 			Atualizar();
-		}else {
-			Atualizar();
-			JOptionPane.showMessageDialog(null, "Invalid move!");
+		} else {
+			GameOver();
 		}
-		
+
 	}
-	
+
 	// Atualiza a posição dos Discos em cada Pino, de acordo com a Pilha
 	public static void Atualizar() {
 
@@ -335,6 +334,15 @@ public class TesteHanoiTower {
 		FillPinC();
 		ZerarBotoes();
 
+	}
+
+	// Finaliza o jogo
+	public static void GameOver() {
+		Atualizar();
+		JOptionPane.showMessageDialog(null, "Invalid move - Game Over");
+		btnA.setEnabled(false);
+		btnB.setEnabled(false);
+		btnC.setEnabled(false);
 	}
 
 }
