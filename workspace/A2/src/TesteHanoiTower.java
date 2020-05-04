@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -313,9 +314,17 @@ public class TesteHanoiTower {
 
 	}
 
+	// Solicita a movimentação do Disco
 	public static void  Mover(char origem, char destino){
-		hanoiTower.Move(origem, destino);
-		Atualizar();
+		boolean sucesso = hanoiTower.Move(origem, destino);
+		
+		if(sucesso) {
+			Atualizar();
+		}else {
+			Atualizar();
+			JOptionPane.showMessageDialog(null, "Invalid move!");
+		}
+		
 	}
 	
 	// Atualiza a posição dos Discos em cada Pino, de acordo com a Pilha
