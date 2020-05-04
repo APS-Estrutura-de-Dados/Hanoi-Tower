@@ -69,7 +69,7 @@ public class Pilha {
 			elementos = null;
 		} else {
 			for (int i = topo; i >= 0; i--) {
-				elementos+=vetor[i];
+				elementos += vetor[i];
 			}
 		}
 		return elementos;

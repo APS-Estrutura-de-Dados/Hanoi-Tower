@@ -12,6 +12,8 @@ import javax.swing.border.LineBorder;
 
 public class TesteHanoiTower {
 
+	private static HanoiTower hanoiTower = new HanoiTower();
+	
 	// Para armazenar a resolucao da maquina
 	public static Toolkit toolkit = Toolkit.getDefaultToolkit();
 	public static Dimension dimension = toolkit.getScreenSize();
@@ -131,9 +133,9 @@ public class TesteHanoiTower {
 					clickA = true;
 
 					if (clickB) {
-						// Move("B", "A");
+						Mover('B', 'A');
 					} else if (clickC) {
-						// Move("C", "A");
+						Mover('C', 'A');
 					}
 
 				} else {
@@ -150,9 +152,9 @@ public class TesteHanoiTower {
 					clickB = true;
 
 					if (clickA) {
-						// Move("A", "B");
+						Mover('A', 'B');
 					} else if (clickC) {
-						// Move("C", "B");
+						Mover('C', 'B');
 					}
 
 				} else {
@@ -169,9 +171,9 @@ public class TesteHanoiTower {
 					clickC = true;
 
 					if (clickA) {
-						// Move("A", "C");
+						Mover('A', 'C');
 					} else if (clickB) {
-						// Move("B", "C");
+						Mover('B', 'C');
 					}
 
 				} else {
@@ -201,8 +203,8 @@ public class TesteHanoiTower {
 	// Identifica quais Discos devem aparecer no Pino A
 	private static void FillPinA() {
 
-		HanoiTower hanoiTower = new HanoiTower();
 		String pin = hanoiTower.printPinA();
+		//System.out.println(pin);
 
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
@@ -238,9 +240,9 @@ public class TesteHanoiTower {
 	// Identifica quais Discos devem aparecer no Pino B
 	private static void FillPinB() {
 
-		HanoiTower hanoiTower = new HanoiTower();
 		String pin = hanoiTower.printPinB();
-
+		//System.out.println(pin);
+		
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
 		if (pin.charAt(0) == '1') {
@@ -276,8 +278,8 @@ public class TesteHanoiTower {
 	// Identifica quais Discos devem aparecer no Pino C
 	private static void FillPinC() {
 
-		HanoiTower hanoiTower = new HanoiTower();
 		String pin = hanoiTower.printPinC();
+		//System.out.println(pin);
 
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
@@ -311,6 +313,11 @@ public class TesteHanoiTower {
 
 	}
 
+	public static void  Mover(char origem, char destino){
+		hanoiTower.Move(origem, destino);
+		Atualizar();
+	}
+	
 	// Atualiza a posição dos Discos em cada Pino, de acordo com a Pilha
 	public static void Atualizar() {
 
