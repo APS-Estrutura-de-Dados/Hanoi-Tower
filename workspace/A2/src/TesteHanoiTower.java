@@ -69,14 +69,6 @@ public class TesteHanoiTower {
 		t2.setBounds(x / 2 - (250 + 65), y - (450 - 80), 130, 60);
 		t3.setBounds(x / 2 - (250 + 75), y - (450 - 140), 150, 60);
 
-		// t1.setBounds(x / 2 - (0 + 55), y - (450 - 20), 110, 60);
-		// t2.setBounds(x / 2 - (0 + 65), y - (450 - 80), 130, 60);
-		// t3.setBounds(x / 2 - (0 + 75), y - (450 - 140), 150, 60);
-
-		// t1.setBounds(x / 2 + (260 - 55), y - (450 - 20), 110, 60);
-		// t2.setBounds(x / 2 + (260 - 65), y - (450 - 80), 130, 60);
-		// t3.setBounds(x / 2 + (260 - 75), y - (450 - 140), 150, 60);
-
 		frame.add(t1);
 		frame.add(t2);
 		frame.add(t3);
@@ -205,7 +197,6 @@ public class TesteHanoiTower {
 	private static void FillPinA() {
 
 		String pin = hanoiTower.printPinA();
-		// System.out.println(pin);
 
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
@@ -242,7 +233,6 @@ public class TesteHanoiTower {
 	private static void FillPinB() {
 
 		String pin = hanoiTower.printPinB();
-		// System.out.println(pin);
 
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
@@ -280,7 +270,6 @@ public class TesteHanoiTower {
 	private static void FillPinC() {
 
 		String pin = hanoiTower.printPinC();
-		// System.out.println(pin);
 
 		// Identificando o Disco 1 (que ficará em baixo) ---
 
@@ -343,6 +332,11 @@ public class TesteHanoiTower {
 		btnA.setEnabled(false);
 		btnB.setEnabled(false);
 		btnC.setEnabled(false);
+		JOptionPane.showMessageDialog(null,
+				"Este Projeto Pertence a:\n\n" + "Jackson Souza Anizio - 21333012\n"
+						+ "Mateus Donaire de Melo - 21286869\n" + "Kleber da Silva alvares 21304275\n"
+						+ "Rafael de Oliveira Severino  21298419\n" + "Thales Lima de Jesus - 21255499\n",
+				"Integrantes do Grupo", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }

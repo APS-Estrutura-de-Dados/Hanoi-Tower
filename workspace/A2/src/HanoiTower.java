@@ -52,7 +52,6 @@ public class HanoiTower {
 			} else if (destino == 'B') {
 				return !Movimento(origem, destino, pinoC, pinoB);
 			}
-
 		}
 		return false;
 
@@ -82,24 +81,21 @@ public class HanoiTower {
 			} else {
 
 				// Se não estiver vazia
-
 				// Pega o valor do Disco que será movido
 				DiscoMovido = pinoOrigem.peekPosition(i);
 
 				// Verifica o tamanho do disco que estiver no topo
 				for (int k = 2; k >= 0; k--) {
-					
+
 					if (pinoDestino.peekPosition(k) > 0) {
-						
+
 						if (DiscoMovido > pinoDestino.peekPosition(k)) {
 							stop = true;
 							pinoOrigem.pop();
 							posicoesExcluidas++;
 							i = -1;
 						}
-						
 					}
-					
 				}
 
 				// Se o Disco sendo movido NÃO for maior que o Disco que ja estiver no Pino de
@@ -110,7 +106,6 @@ public class HanoiTower {
 					posicoesExcluidas++;
 					i = -1;
 				}
-
 			}
 		}
 
@@ -120,56 +115,49 @@ public class HanoiTower {
 			pinoOrigem.push(0);
 		}
 
-		
+		// Registra quantas posicoes iguais a zero foram excluidas, para reposição
+		posicoesExcluidas = 0;
 
-			// Registra quantas posicoes iguais a zero foram excluidas, para reposição
-			posicoesExcluidas = 0;
+		// ADICIONA NO PINO DESTINO
+		for (int i = 2; i > -1;) {
 
-			// ADICIONA NO PINO DESTINO
-			for (int i = 2; i > -1;) {
+			// Verifica se a posicão está vazia
+			if (pinoDestino.peekPosition(i) == 0) {
 
-				// Verifica se a posicão está vazia
-				if (pinoDestino.peekPosition(i) == 0) {
-
-					// Verifica se já chegou na ultima posição
-					if (i == 0) {
-						// Se a ultima posição estiver vazia, o disco será inserido nela
-						pinoDestino.pop();
-						pinoDestino.push(DiscoMovido);
-						i = -1;
-					} else {
-						// Exclui a posição vazia
-						pinoDestino.pop();
-						posicoesExcluidas++;
-					}
-
-					i--;
-
-				} else {
-					// Se a posição não estiver vazia, adiciona o disco na posição excluida
-					// anteriormente
+				// Verifica se já chegou na ultima posição
+				if (i == 0) {
+					// Se a ultima posição estiver vazia, o disco será inserido nela
+					pinoDestino.pop();
 					pinoDestino.push(DiscoMovido);
 					i = -1;
+				} else {
+					// Exclui a posição vazia
+					pinoDestino.pop();
+					posicoesExcluidas++;
 				}
 
-			}
+				i--;
 
-			// REAJUSTA O PINO DESTINO
-			for (int i = 0; i < posicoesExcluidas; i++) {
-				// Repõe as posições vazias que foram excluidas
-				pinoDestino.push(0);
+			} else {
+				// Se a posição não estiver vazia, adiciona o disco na posição excluida
+				// anteriormente
+				pinoDestino.push(DiscoMovido);
+				i = -1;
 			}
-		
+		}
+
+		// REAJUSTA O PINO DESTINO
+		for (int i = 0; i < posicoesExcluidas; i++) {
+			// Repõe as posições vazias que foram excluidas
+			pinoDestino.push(0);
+		}
+
 		return stop;
 	}
 
 	// Imprime a configuracao atual dos 3 Pinos
 	public String print() {
-		String configuracaoAtual = "";
-		configuracaoAtual += pinoA.print();
-		configuracaoAtual += "," + pinoB.print();
-		configuracaoAtual += "," + pinoC.print();
-		return configuracaoAtual;
+		return pinoA.print() + pinoB.print() + pinoC.print();
 	}
 
 	// Imprime a configuracao atual do Pino A
@@ -186,5 +174,5 @@ public class HanoiTower {
 	public String printPinC() {
 		return pinoC.print();
 	}
-	
+
 }
